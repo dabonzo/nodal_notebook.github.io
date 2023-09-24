@@ -2,7 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>http://NodalNotebook.aria-network.com/</loc>
-         <lastmod>2023-09-23</lastmod>
+         <lastmod>2023-09-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://NodalNotebook.aria-network.com/about_me/</loc>
+         <lastmod>2023-09-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://NodalNotebook.aria-network.com/ctf_walkthroughs/</loc>
+         <lastmod>2023-09-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://NodalNotebook.aria-network.com/cybersecurity_arsenal/</loc>
+         <lastmod>2023-09-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://NodalNotebook.aria-network.com/resources/</loc>
+         <lastmod>2023-09-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://NodalNotebook.aria-network.com/sysadmin_chronicles/</loc>
+         <lastmod>2023-09-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://NodalNotebook.aria-network.com/technical_advice/</loc>
+         <lastmod>2023-09-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://NodalNotebook.aria-network.com/technical_advice/auto-adjusting-screen-resolutions-kvm-qemu-udev-spice/</loc>
+         <lastmod>2023-09-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
