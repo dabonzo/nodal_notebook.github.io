@@ -627,6 +627,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#about-the-spice-agent" class="md-nav__link">
+    About the SPICE Agent
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#wrap-up" class="md-nav__link">
     Wrap-Up
   </a>
@@ -784,6 +791,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#about-the-spice-agent" class="md-nav__link">
+    About the SPICE Agent
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#wrap-up" class="md-nav__link">
     Wrap-Up
   </a>
@@ -931,6 +945,35 @@ By pairing the above script with the simple udev rule, we can automatically adju
 </details>
 <h3 id="udev-rules">udev rules</h3>
 <p>These are configurations that dictate how udev responds to specific hardware changes. In our context, we utilize udev rules to trigger our screen resolution adjustment script when there's a change in the display settings of the VM.</p>
+<h2 id="about-the-spice-agent">About the <code>SPICE Agent</code></h2>
+<p>For the auto-resize feature to work with QEMU/KVM when using the SPICE protocol, you typically need the <code>spice-vdagent</code> (often referred to as the "SPICE agent") running inside the guest. The SPICE agent facilitates many enhanced functionalities, including clipboard sharing, automatic screen resizing, and more.</p>
+<p>Here's how it all comes together:</p>
+<ol>
+<li>
+<p><strong>Guest Display Resizing:</strong> When you resize the QEMU/KVM guest window on the host, the SPICE client (like <code>virt-viewer</code> or <code>spicy</code>) sends a message to the SPICE server component running with QEMU, indicating the new screen dimensions.</p>
+</li>
+<li>
+<p><strong>SPICE Server to Guest:</strong> The SPICE server then communicates this information to the <code>spice-vdagent</code> running inside the guest. This is achieved using a virtual channel.</p>
+</li>
+<li>
+<p><strong>Notification to the System:</strong> Once the <code>spice-vdagent</code> in the guest receives the resize information, it triggers a change event in the graphics subsystem. This event is detected by the udev subsystem thanks to the rule you set up, which then launches the <code>/usr/local/bin/resize</code> script to adjust the screen resolution accordingly.</p>
+</li>
+</ol>
+<p>To ensure the SPICE agent is operational:</p>
+<ol>
+<li>
+<p><strong>Installation:</strong> Ensure <code>spice-vdagent</code> is installed in the guest.
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>spice-vdagent
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Autostart:</strong> Ensure the <code>spice-vdagent</code> service is enabled to start automatically on boot. Depending on the init system, this might involve using <code>systemctl</code> or another service manager.</p>
+</li>
+<li>
+<p><strong>Manual Start:</strong> You can also manually start the agent from within the guest, usually by just running <code>spice-vdagent</code> from the terminal.</p>
+</li>
+</ol>
+<p>If the SPICE agent isn't running, the screen resize event from the SPICE client won't be propagated to the guest system, and as a result, the udev rule won't be triggered.</p>
 <h2 id="wrap-up">Wrap-Up</h2>
 <p>Harnessing the capabilities of <code>udev</code>, <code>shell scripting</code>, <code>SPICE</code>, and <code>spice-agent</code>, we've fashioned a solution to tackle the irksome issue of non-responsive VM screen resolutions. No more manual tinkering — just seamless auto-adjustments.</p>
 <h2 id="credits">Credits</h2>
